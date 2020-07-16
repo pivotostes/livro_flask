@@ -1,4 +1,3 @@
-# teste
 import sys
 from importlib import reload
 from app import create_app
