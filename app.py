@@ -14,6 +14,7 @@ from controller.User import UserController
 
 config = app_config[app_active]
 
+
 def create_app(config_name):
     app = Flask(__name__, template_folder='templates')
 
@@ -23,7 +24,6 @@ def create_app(config_name):
     app.config['SQLALCHEMY_DATABASE_URI'] = config.SQLALCHEMY_DATABASE_URI
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['FLASK_ADMIN_SWATCH'] = 'paper'
-
 
     db = SQLAlchemy(config.APP)
 
@@ -51,8 +51,11 @@ def create_app(config_name):
         if result:
             return redirect('/admin')
         else:
-            return render_template('login.html', data={'status': 401, 'msg':\
-                 'Dados de usuário incorretos', 'type': None})
+            return render_template('login.html',
+                                   data={
+                                    'status': 401,
+                                    'msg': 'Dados de usuário incorretos',
+                                    'type': None})
 
     @app.route('/recovery-password/')
     def recovery_password():
@@ -66,9 +69,11 @@ def create_app(config_name):
 
         if result:
             return render_template('recovery.html', data={'status': 200,
-            'msg': 'E-mail de recuperacão enviado com sucesso'})
+                                   'msg': 'E-mail de recuperacão enviado\
+                                    com sucesso'})
         else:
             return render_template('recovery.html', data={'status': 401,
-            'msg': 'Erro ao enviar e-mail de recuperação'})
+                                   'msg': 'Erro ao enviar e-mail de\
+                                    recuperação'})
 
     return app
