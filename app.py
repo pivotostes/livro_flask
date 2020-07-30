@@ -11,6 +11,7 @@ from admin.Admin import start_views
 # Adicione a controller UserController
 # controllers
 from controller.User import UserController
+from controller.Product import ProductController
 
 config = app_config[app_active]
 
@@ -23,7 +24,7 @@ def create_app(config_name):
     app.config.from_pyfile('config.py')
     app.config['SQLALCHEMY_DATABASE_URI'] = config.SQLALCHEMY_DATABASE_URI
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['FLASK_ADMIN_SWATCH'] = 'paper'
+    app.config['FLASK_ADMIN_SWATCH'] = 'yeti'
 
     db = SQLAlchemy(config.APP)
 
@@ -75,5 +76,18 @@ def create_app(config_name):
             return render_template('recovery.html', data={'status': 401,
                                    'msg': 'Erro ao enviar e-mail de\
                                     recuperação'})
+
+    @app.route('/product', methods=['POST'])
+    def save_products():
+        product = ProductController()
+
+        result = product.save_product(request.form)
+
+        if result:
+            message = 'Inserido'
+        else:
+            message = 'Não inserido'
+
+        return message
 
     return app

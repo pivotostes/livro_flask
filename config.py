@@ -16,7 +16,7 @@ class Config(object):
 class DevelopmentConfig(Config):
     TESTING = True
     DEBUG = True
-    IP_HOST = 'localhost'
+    IP_HOST = '192.168.1.104'
     PORT_HOST = 8000
     URL_MAIN = 'http://%s:%s/' % (IP_HOST, PORT_HOST)
 
