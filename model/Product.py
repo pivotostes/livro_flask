@@ -52,7 +52,7 @@ class Product(db.Model):
 
     def update(self, obj):
         try:
-            res = db.session.query(Product).filter(Product.id == self.id).update(obj)
+            db.session.query(Product).filter(Product.id == self.id).update(obj)
             db.session.commit()
             return True
         except Exception as e:
