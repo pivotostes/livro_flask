@@ -1,22 +1,28 @@
 # -*- coding: utf-8 -*-
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import relationship
+from sqlalchemy import func
 from config import app_config, app_active
 from model.Role import Role
 from passlib.hash import pbkdf2_sha256
 config = app_config[app_active]
 db = SQLAlchemy(config.APP)
 
+
 class User(db.Model):
-    id=db.Column(db.Integer,primary_key=True)
-    username=db.Column(db.String(40),unique=True,nullable=False)
-    email=db.Column(db.String(120),unique=True,nullable=False)
-    password=db.Column(db.String(256),nullable=False)
-    date_created=db.Column(db.DateTime(6),default=db.func.current_timestamp(),nullable=False)
-    last_update=db.Column(db.DateTime(6),onupdate=db.func.current_timestamp(),nullable=False)
-    recovery_code=db.Column(db.String(200),nullable=True)
-    active=db.Column(db.Boolean(),default=1,nullable=True)
-    role=db.Column(db.Integer,db.ForeignKey(Role.id),nullable=False)
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(40), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    password = db.Column(db.String(256), nullable=False)
+    date_created = db.Column(db.DateTime(6),
+                             default=db.func.current_timestamp(),
+                             nullable=False)
+    last_update = db.Column(db.DateTime(6),
+                            onupdate=db.func.current_timestamp(),
+                            nullable=False)
+    recovery_code = db.Column(db.String(200), nullable=True)
+    active = db.Column(db.Boolean(), default=1, nullable=True)
+    role = db.Column(db.Integer, db.ForeignKey(Role.id), nullable=False)
 
     funcao = relationship(Role)
 
@@ -56,3 +62,12 @@ class User(db.Model):
         except ValueError:
             return False
 
+    def get_total_users(self):
+        try:
+            res = db.session.query(func.count(User.id)).first()
+        except Exception as e:
+            res = []
+            print(e)
+        finally:
+            db.session.close()
+            return res
