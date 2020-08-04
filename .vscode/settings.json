@@ -3,7 +3,7 @@
     "python.linting.pylintEnabled": false,
     "python.linting.enabled": true,
     "python.linting.pylintArgs": ["--load-plugins", "pylint-flask", "pyling-flask-sqlalchemy"],
-    "python.languageServer": "Microsoft",
+    "python.languageServer": "Pylance",
     "python.linting.flake8Enabled": true,
     "sqltools.connections": []
 }
