@@ -27,7 +27,8 @@ class HomeView(AdminIndexView):
 
         return self.render('home_admin.html', report={
                            'users': 0 if not users else users[0],
-                           'categories': 0 if not categories else categories[0],
+                           'categories': 0 if not categories else
+                           categories[0],
                            'products': 0 if not products else products[0]},
                            last_products=last_products)
 

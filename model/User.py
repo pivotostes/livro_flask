@@ -30,14 +30,19 @@ class User(db.Model):
         return '%s - %s' % (self.id, self.username)
 
     def get_user_by_email(self):
-        """
-        Construiremos essa função capítulos depois
-        """
-        return ''
-
-    def get_user_by_id(self, user_id):
         try:
-            res = db.session.query(User).filter(User.id == user_id).first()
+            res = db.session.query(User).filter(User.email == self.email).\
+                first()
+        except Exception as e:
+            res = None
+            print(e)
+        finally:
+            db.session.close()
+            return res
+
+    def get_user_by_id(self):
+        try:
+            res = db.session.query(User).filter(User.id == self.id).first()
         except Exception as e:
             res = None
             print(e)
