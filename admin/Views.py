@@ -83,3 +83,8 @@ class UserView(ModelView):
                 User.set_password(form.password.data)
             else:
                 del form.password
+
+
+class ProductView(ModelView):
+
+    form_excluded_columns = ('last_update')

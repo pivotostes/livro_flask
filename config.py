@@ -1,6 +1,6 @@
 import os
-import random
-import string
+# import random
+# import string
 
 
 class Config(object):
@@ -16,7 +16,7 @@ class Config(object):
 class DevelopmentConfig(Config):
     TESTING = True
     DEBUG = True
-    IP_HOST = '192.168.1.104'
+    IP_HOST = '192.168.100.103'
     PORT_HOST = 8000
     URL_MAIN = 'http://%s:%s/' % (IP_HOST, PORT_HOST)
 
@@ -48,5 +48,3 @@ app_config = {
 }
 
 app_active = os.getenv('FLASK_ENV')
-# if __debug__:
-#     app_active = 'development'

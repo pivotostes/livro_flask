@@ -35,17 +35,18 @@ class User(db.Model):
         """
         return ''
 
-    def get_user_by_id(self):
-        """
-        Construiremos essa função capítulos depois
-        """
-        return ''
+    def get_user_by_id(self, user_id):
+        try:
+            res = db.session.query(User).filter(User.id == user_id).first()
+        except Exception as e:
+            res = None
+            print(e)
+        finally:
+            db.session.close()
+            return res
 
     def update(self, obj):
-        """
-        Construiremos essa função capítulos depois
-        """
-        return ''
+        pass
 
     def hash_password(self, password):
         try:

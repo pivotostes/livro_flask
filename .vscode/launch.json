@@ -10,7 +10,10 @@
             "request": "launch",
             "program": "${file}",
             "console": "internalConsole",
-            "env" : {"PYTHONPATH": "${workspaceFolder}"},
+            "env" : {
+                "PYTHONPATH": "${workspaceFolder}",
+                "FLASK_ENV": "development"
+            },
         }
     ]
 }
